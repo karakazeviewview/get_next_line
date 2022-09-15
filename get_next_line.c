@@ -15,13 +15,13 @@
 
 char	*get_next_line(int	fd)
 {
-	static char	save[BUFFER_SIZE + 1] = "\0";
+	static char	save[BUFFER_SIZE + 1];
 	char		*buf;
 	int			n;
 
 	n = -42;
 	buf = ft_strdup(save);
-	if (buf == NULL)
+	if (!buf)
 		return (NULL);
 	while ((ft_strchr(buf, '\n') == NULL) && n != 0)
 	{

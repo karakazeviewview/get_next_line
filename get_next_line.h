@@ -19,10 +19,10 @@
 #  define BUFFER_SIZE 1000
 # endif
 
-# if BUFFER_SIZE < 1
-#  undef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+// # if BUFFER_SIZE < 1
+// #  undef BUFFER_SIZE
+// #  define BUFFER_SIZE 42
+// # endif
 
 char	*ft_front(char	*save);
 char	*get_next_line(int	fd);
