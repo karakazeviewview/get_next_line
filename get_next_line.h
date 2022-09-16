@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmatsuo <mmatsuo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 07:48:41 by mmatsuo           #+#    #+#             */
 /*   Updated: 2022/07/14 00:25:01 by mmatsuo          ###   ########.fr       */
