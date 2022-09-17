@@ -3,45 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmatsuo <mmatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: mmatsuo <mmatsuo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 07:47:09 by mmatsuo           #+#    #+#             */
-/*   Updated: 2022/07/14 00:47:04 by mmatsuo          ###   ########.fr       */
+/*   Updated: 2022/09/17 17:00:04 by mmatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
 
-char	*get_next_line(int	fd)
+static void	*ft_free(char	*buf)
 {
-	static char	save[BUFFER_SIZE + 1];
-	char		*buf;
-	int			n;
-
-	n = -42;
-	buf = ft_strdup(save);
-	if (!buf)
-		return (NULL);
-	while ((ft_strchr(buf, '\n') == NULL) && n != 0)
-	{
-		n = read(fd, save, BUFFER_SIZE);
-		if (n == -1)
-		{
-			free(buf);
-			return (NULL);
-		}
-		save[n] = '\0';
-		buf = ft_strjoin(buf, save);
-		if (buf == NULL)
-			return (NULL);
-	}
-	ft_back(save, buf);
 	free(buf);
-	return (ft_front(buf));
+	return (NULL);
 }
 
-char	*ft_front(char	*save)
+static char	*ft_front(char	*save)
 {
 	char	*tmp;
 	int		i;
@@ -69,7 +47,7 @@ char	*ft_front(char	*save)
 	return (tmp);
 }
 
-void	ft_back(char	*save, char	*buf)
+static void	ft_back(char	*save, char	*buf)
 {
 	int	i;
 	int	j;
@@ -93,17 +71,32 @@ void	ft_back(char	*save, char	*buf)
 	save[j] = '\0';
 }
 
-void	*ft_free(char	*buf)
+char	*get_next_line(int	fd)
 {
-	free(buf);
-	return (NULL);
-}
+	static char	save[BUFFER_SIZE + 1];
+	char		*buf;
+	int			n;
 
-void	*ft_free_w(char	*save, char	*buf)
-{
-	free(buf);
-	free(save);
-	return (NULL);
+	n = -42;
+	buf = ft_strdup(save);
+	if (!buf)
+		return (NULL);
+	while ((ft_strchr(buf, '\n') == NULL) && n != 0)
+	{
+		n = read(fd, save, BUFFER_SIZE);
+		if (n == -1)
+		{
+			ft_free(buf);
+			return (NULL);
+		}
+		save[n] = '\0';
+		buf = ft_strjoin(buf, save);
+		if (buf == NULL)
+			return (NULL);
+	}
+	ft_back(save, buf);
+	ft_free(buf);
+	return (ft_front(buf));
 }
 
 /*
