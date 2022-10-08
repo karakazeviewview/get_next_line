@@ -147,3 +147,25 @@ int	main(int	argc, char	*argv[])
 	return (0);
 }
 */
+/*
+int main(int    argc, char **argv) //direct input
+{
+    char    *str;
+    int        fd;
+    if(argc == 1)
+        fd = 0;
+    else
+        fd = open(argv[1], O_RDONLY);
+    while (1)
+    {
+        str = get_next_line(fd);
+        printf("%s", str);
+        if (!str)
+            break;
+        free(str);
+    }
+    close(fd);
+    //system("leaks a.out");
+    return (0);
+}
+*/
